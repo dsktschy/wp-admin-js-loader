@@ -36,7 +36,7 @@ add_action('admin_enqueue_scripts', function() {
 // Class as a namespace
 class WpAdminCssLoader
 {
-  static public $fieldId = 'admin_css_url';
+  static public $fieldId = 'wp_admin_css_loader';
   static public $fieldPage = 'general';
   // Outputs an input element with initial value
   static public function echoField(array $args)
