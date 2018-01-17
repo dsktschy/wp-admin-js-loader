@@ -15,7 +15,7 @@ add_filter('admin_init', function() {
     WpAdminCssLoader::$fieldId,
     preg_match('/^ja/', get_option('WPLANG')) ?
       '管理画面で読み込むCSSファイルのURL' :
-      'Urls of CSS files to link on admin pages',
+      'URLs of CSS files to link on admin pages',
     ['WpAdminCssLoader', 'echoField'],
     WpAdminCssLoader::$fieldPage,
     'default',
