@@ -28,7 +28,11 @@ add_filter('admin_init', function() {
 add_action('admin_enqueue_scripts', function() {
   $option = get_option(WpAdminCssLoader::$fieldId);
   if ($option === '') return;
-  foreach (explode(',', str_replace(' ', '', $option)) as $i => $url) {
+  foreach (array_map(
+    ['WpAdminCssLoader', 'encodeSpace'],
+    array_map('trim', explode(',', $option))
+  ) as $i => $url) {
+    if ($url === '') continue;
     wp_enqueue_style("wpacl-admin-custom-{$i}", $url);
   }
 });
@@ -44,5 +48,10 @@ class WpAdminCssLoader
     $id = $args['id'];
     $value = esc_html(get_option($id));
     echo "<input name=\"$id\" id=\"$id\" type=\"text\" value=\"$value\" class=\"regular-text code\">";
+  }
+  // Encode spaces
+  static public function encodeSpace($url)
+  {
+    return str_replace(' ', '%20', $url);
   }
 }
